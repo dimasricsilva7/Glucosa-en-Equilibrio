@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { getSettings, saveSettings, getLeads } from "../../lib/db";
-import { withDefaults, SETTING_KEYS } from "../../lib/defaults";
+import { withDefaults } from "../../lib/defaults";
 
 export const dynamic = "force-dynamic";
 
@@ -14,36 +15,53 @@ async function login(formData) {
   const pw = process.env.ADMIN_PASSWORD;
   if (pw && formData.get("password") === pw) {
     cookies().set("admin", pw, { httpOnly: true, secure: true, sameSite: "lax", path: "/" });
+    redirect("/admin");
   }
+  redirect("/admin?bad=1");
 }
 
 async function logout() {
   "use server";
   cookies().delete("admin");
+  redirect("/admin");
 }
 
 async function save(formData) {
   "use server";
-  if (!authed()) return;
+  if (!authed()) redirect("/admin");
   const data = {};
-  for (const k of SETTING_KEYS) data[k] = (formData.get(k) || "").toString().trim();
-  await saveSettings(data);
+  for (const k of FIELDS.flatMap((g) => g.keys)) data[k] = (formData.get(k) || "").toString().trim();
+  let err = "";
+  try {
+    await saveSettings(data);
+  } catch (e) {
+    err = e.message || "error";
+  }
+  redirect(err ? "/admin?err=" + encodeURIComponent(err) : "/admin?ok=1");
 }
 
+// Campos agrupados por seção
+const FIELDS = [
+  { title: "Hero", keys: ["heroTitle"] },
+  { title: "Preços (MXN)", keys: ["priceOld", "priceNow"], row: true },
+  { title: "Imagens (cole um link, ou deixe /hero.png etc.)", keys: ["heroImg", "coverImg", "authorImg"] },
+  { title: "Autor", keys: ["authorName", "authorDesc"] },
+  { title: "Checkout", keys: ["checkoutUrl"] },
+];
 const LABELS = {
   heroTitle: "Título da hero",
-  priceOld: "Preço antigo (MXN)",
-  priceNow: "Preço atual (MXN)",
-  heroImg: "Imagem da hero (link ou /hero.png)",
-  coverImg: "Imagem da capa (link ou /portada.png)",
-  authorImg: "Imagem do autor (link)",
+  priceOld: "Preço antigo",
+  priceNow: "Preço atual",
+  heroImg: "Imagem da hero",
+  coverImg: "Imagem da capa",
+  authorImg: "Imagem do autor",
   authorName: "Nome do autor",
   authorDesc: "Descrição do autor",
   checkoutUrl: "Link de checkout (MundiPay)",
 };
 const BIG = new Set(["heroTitle", "authorDesc"]);
 
-export default async function Admin() {
+export default async function Admin({ searchParams }) {
   if (!authed()) {
     const locked = !process.env.ADMIN_PASSWORD;
     return (
@@ -51,9 +69,10 @@ export default async function Admin() {
         <form action={login} className="admin-card">
           <h1>Admin · Azúcar Bajo Control</h1>
           {locked ? (
-            <p className="admin-warn">Configure a variável <b>ADMIN_PASSWORD</b> na Vercel para ativar o acesso.</p>
+            <p className="admin-status err">Configure a variável <b>ADMIN_PASSWORD</b> na Vercel e faça Redeploy para ativar o acesso.</p>
           ) : (
             <>
+              {searchParams?.bad && <p className="admin-status err">Senha incorreta.</p>}
               <input name="password" type="password" placeholder="Senha de admin" autoFocus />
               <button className="btn btn-lg" type="submit">Entrar</button>
             </>
@@ -69,44 +88,57 @@ export default async function Admin() {
   return (
     <div className="admin">
       <div className="admin-head">
-        <h1>Admin · Azúcar Bajo Control</h1>
+        <div>
+          <h1>Admin · Azúcar Bajo Control</h1>
+          <a className="admin-link" href="/" target="_blank">ver site ↗</a>
+        </div>
         <form action={logout}><button className="admin-logout" type="submit">Sair</button></form>
       </div>
 
+      {searchParams?.ok && <p className="admin-status ok">✓ Alterações salvas com sucesso.</p>}
+      {searchParams?.err && <p className="admin-status err">Não salvou: {decodeURIComponent(String(searchParams.err))}. Se mencionar DATABASE_URL, conecte o Neon e faça Redeploy.</p>}
       {!process.env.DATABASE_URL && (
-        <p className="admin-warn">⚠️ Sem <b>DATABASE_URL</b>: as edições não serão salvas e os pedidos não serão gravados. Configure o banco na Vercel.</p>
+        <p className="admin-status warn">⚠️ Banco não conectado neste deploy. Conecte o Neon na Vercel e clique em <b>Redeploy</b> — sem isso as edições e os pedidos não são salvos.</p>
       )}
 
       <form action={save} className="admin-card">
-        <h2>Conteúdo do site</h2>
-        {SETTING_KEYS.map((k) => (
-          <label className="admin-field" key={k}>
-            <span>{LABELS[k]}</span>
-            {BIG.has(k)
-              ? <textarea name={k} defaultValue={s[k]} rows={k === "authorDesc" ? 6 : 3} />
-              : <input name={k} defaultValue={s[k]} />}
-          </label>
+        {FIELDS.map((group) => (
+          <div className="admin-section" key={group.title}>
+            <h2>{group.title}</h2>
+            <div className={group.row ? "admin-row2" : ""}>
+              {group.keys.map((k) => (
+                <label className="admin-field" key={k}>
+                  <span>{LABELS[k]}</span>
+                  {BIG.has(k)
+                    ? <textarea name={k} defaultValue={s[k]} rows={k === "authorDesc" ? 6 : 2} />
+                    : <input name={k} defaultValue={s[k]} />}
+                </label>
+              ))}
+            </div>
+          </div>
         ))}
-        <button className="btn btn-lg" type="submit">Salvar alterações</button>
+        <button className="btn btn-lg admin-save" type="submit">Salvar alterações</button>
       </form>
 
       <div className="admin-card">
-        <h2>Pedidos / leads ({leads.length})</h2>
+        <h2>Clientes / pedidos <span className="admin-count">{leads.length}</span></h2>
         {leads.length === 0 ? (
           <p className="admin-muted">Ainda nenhum pedido registrado.</p>
         ) : (
-          <table className="admin-table">
-            <thead><tr><th>Nome</th><th>E-mail</th><th>Data</th></tr></thead>
-            <tbody>
-              {leads.map((l, i) => (
-                <tr key={i}>
-                  <td>{l.name}</td>
-                  <td>{l.email}</td>
-                  <td>{new Date(l.created_at).toLocaleString("pt-BR")}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead><tr><th>Nome</th><th>E-mail</th><th>Data</th></tr></thead>
+              <tbody>
+                {leads.map((l, i) => (
+                  <tr key={i}>
+                    <td>{l.name || "—"}</td>
+                    <td>{l.email}</td>
+                    <td className="admin-date">{new Date(l.created_at).toLocaleString("pt-BR")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
