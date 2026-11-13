@@ -1,6 +1,7 @@
 import Image from "next/image";
 import heroImg from "../public/hero.png";
 import portadaImg from "../public/portada.png";
+import autoraImg from "../public/autora.png";
 
 // ⬇️ CAMBIA ESTA URL por tu link de checkout de MundiPay
 const CHECKOUT_URL = "https://pago.mundipay.com/TU-LINK-AQUI";
@@ -193,6 +194,31 @@ export default function Home() {
                 <div className="val">Valor {b[3]} MXN</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SOBRE LA AUTORA */}
+      <section className="section author">
+        <div className="wrap author-wrap">
+          <div className="author-photo">
+            <Image src={autoraImg} alt="Autora de Azúcar Bajo Control" className="author-img" sizes="(max-width:760px) 220px, 360px" placeholder="blur" />
+          </div>
+          <div className="author-copy">
+            <span className="eyebrow-dark">Quién está detrás</span>
+            <h2>Comida mexicana de verdad, pensada para tu glucosa</h2>
+            <p>
+              Azúcar Bajo Control nace de una idea simple: cuidar tu azúcar no tiene por qué
+              significar comer aburrido ni renunciar a los platillos que amas.
+            </p>
+            <p>
+              Cada una de las +100 recetas fue seleccionada y probada bajo un mismo principio
+              —el del <b>plato equilibrado</b> y el <b>orden de los alimentos</b>— para que
+              disfrutes tu comida de siempre con la fibra, la proteína y la grasa buena en su
+              punto. Sin dietas imposibles, sin ingredientes raros. Comida real, pensada para
+              tu día a día.
+            </p>
+            <p className="author-name">— Equipo Azúcar Bajo Control</p>
           </div>
         </div>
       </section>

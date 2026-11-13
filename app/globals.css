@@ -86,6 +86,22 @@ p{font-size:clamp(15px,1.9vw,17px)}
 .bono p{font-size:14.5px;opacity:.9}
 .bono .val{margin-top:10px;font-weight:800;text-decoration:line-through;opacity:.7;font-size:14px}
 
+/* Sobre la autora */
+.author{background:var(--cream)}
+.author-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:center}
+.author-photo{display:flex;justify-content:center}
+.author-img{width:100%;height:auto;max-width:360px;border-radius:18px;box-shadow:var(--shadow-lg)}
+.eyebrow-dark{display:inline-block;background:var(--teal-l);color:var(--teal-d);padding:6px 14px;border-radius:50px;font-size:13px;font-weight:800;letter-spacing:.02em;margin-bottom:12px}
+.author-copy h2{text-align:left}
+.author-copy p{margin-top:14px;color:var(--grey)}
+.author-name{font-weight:800;color:var(--ink);margin-top:16px}
+@media(max-width:760px){
+  .author-wrap{grid-template-columns:1fr;gap:22px;text-align:center}
+  .author-copy h2{text-align:center}
+  .eyebrow-dark{margin-inline:auto}
+  .author-img{max-width:260px}
+}
+
 /* Testimonios */
 .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px}
 .testi{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
