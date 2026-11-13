@@ -1,6 +1,27 @@
 // ⬇️ CAMBIA ESTA URL por tu link de checkout de MundiPay
 const CHECKOUT_URL = "https://pago.mundipay.com/TU-LINK-AQUI";
 
+// "El Plato del Equilibrio": el método del recetario, en una imagen.
+function PlatoEquilibrio() {
+  return (
+    <div className="plato">
+      <svg viewBox="0 0 120 120" role="img" aria-label="El Plato del Equilibrio: mitad verduras, un cuarto proteína, un cuarto carbohidratos inteligentes">
+        <circle cx="60" cy="60" r="56" fill="#ffffff" />
+        <path d="M60,60 L60,8 A52,52 0 0 1 60,112 Z" fill="#5cb878" />
+        <path d="M60,60 L60,112 A52,52 0 0 1 8,60 Z" fill="#f2994a" />
+        <path d="M60,60 L8,60 A52,52 0 0 1 60,8 Z" fill="#f4c56b" />
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#ffffff" strokeWidth="5" />
+        <circle cx="60" cy="60" r="12" fill="#ffffff" />
+      </svg>
+      <div className="plato-legend">
+        <span><i style={{ background: "#5cb878" }} />½ Verduras y fibra</span>
+        <span><i style={{ background: "#f2994a" }} />¼ Proteína</span>
+        <span><i style={{ background: "#f4c56b" }} />¼ Carbohidratos inteligentes</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -15,25 +36,31 @@ export default function Home() {
 
       {/* HERO */}
       <header className="hero">
-        <div className="wrap center">
-          <span className="eyebrow">Para quien vive con diabetes o azúcar alta</span>
-          <h1>
-            Come rico <span className="amber">sin disparar tu azúcar</span>, con
-            recetas mexicanas de verdad
-          </h1>
-          <p className="sub">
-            100 recetas fáciles y económicas para desayunar, comer y cenar
-            cuidando tu glucosa. Sin dietas imposibles y sin dejar lo que te
-            gusta.
-          </p>
-          <div className="cta-wrap">
-            <a className="btn btn-lg" href={CHECKOUT_URL}>
-              Quiero mis 100 recetas ahora
-              <span className="btn-sub">Acceso inmediato · Pago seguro</span>
-            </a>
-            <div className="trust">🔒 Descarga al instante · 🇲🇽 Ingredientes mexicanos</div>
+        <div className="wrap hero-grid">
+          <div className="hero-copy">
+            <span className="eyebrow">Para quien vive con diabetes o azúcar alta</span>
+            <h1>
+              Come rico <span className="amber">sin disparar tu azúcar</span>, con
+              recetas mexicanas de verdad
+            </h1>
+            <p className="sub">
+              100 recetas fáciles y económicas para desayunar, comer y cenar
+              cuidando tu glucosa. Sin dietas imposibles y sin dejar lo que te
+              gusta.
+            </p>
+            <div className="cta-wrap">
+              <a className="btn btn-lg" href={CHECKOUT_URL}>
+                Quiero mis 100 recetas ahora
+                <span className="btn-sub">Acceso inmediato · Pago seguro</span>
+              </a>
+              <div className="trust">🔒 Descarga al instante · 🇲🇽 Ingredientes mexicanos · 🛡️ Garantía de 7 días</div>
+            </div>
           </div>
-          <div className="plate"><span className="emoji">🥑</span></div>
+          <div className="hero-visual">
+            <div className="hero-badge">100<small>recetas</small></div>
+            <PlatoEquilibrio />
+            <p className="plato-cap">Aprende a armar tu plato para que la comida<br/>juegue a favor de tu azúcar.</p>
+          </div>
         </div>
       </header>
 
@@ -55,7 +82,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="center" style={{marginTop:28,maxWidth:680,marginInline:"auto",color:"var(--grey)"}}>
+          <p className="center pains-note">
             No es falta de voluntad. Es que nadie te enseñó <b>cómo combinar tu plato</b> para
             que la comida juegue a tu favor. Eso cambia hoy.
           </p>
@@ -90,6 +117,82 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BENEFICIOS / TRANSFORMACIÓN */}
+      <section className="section benefits">
+        <div className="wrap">
+          <h2 className="center">Cómo te vas a sentir en las próximas semanas</h2>
+          <p className="lead">No es una dieta. Es una forma de comer que puedes sostener toda la vida, con la comida que ya conoces y te gusta.</p>
+          <div className="benefit-grid">
+            {[
+              ["⚡","Energía toda la tarde","Se acaba el bajón después de comer. Te levantas de la mesa con pilas, no con sueño."],
+              ["📉","Tu azúcar, más estable","Platos pensados para que la glucosa suba lento, sin esos picos que te preocupan."],
+              ["😋","Comer rico sin culpa","Tacos, guisados, antojitos y hasta postres: versiones ricas que sí puedes comer."],
+              ["🍽️","Nunca más “¿qué cocino?”","Con el menú de 7 días y las 100 recetas, siempre sabes qué hacer de comer."],
+              ["💸","Gastas menos","Ingredientes mexicanos de siempre y económicos. Nada raro ni caro de importación."],
+              ["🧘","Más tranquilidad","Comes con confianza y llegas a tu próxima medición sin cruzar los dedos."],
+            ].map((b,i)=>(
+              <div className="benefit" key={i}>
+                <div className="ic">{b[0]}</div>
+                <div>
+                  <h3>{b[1]}</h3>
+                  <p>{b[2]}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QUÉ ENTREGA / QUÉ RECIBES */}
+      <section className="section deliver">
+        <div className="wrap">
+          <h2 className="center">Esto es exactamente lo que recibes hoy</h2>
+          <div className="deliver-grid">
+            {[
+              ["📘","Recetario con 100 recetas","Desayunos, comidas, cenas, snacks y postres sin azúcar. En PDF, para siempre."],
+              ["🍽️","Método “El Plato del Equilibrio”","El esquema simple para armar cualquier comida sin disparar tu glucosa."],
+              ["🗓️","Menú de 7 días","Un plan día por día para que empieces sin pensar y sin complicarte."],
+              ["🍫","Guía de antojos dulces","Qué hacer cuando se te antoja algo dulce, sin culpa y sin picos."],
+              ["🛒","Lista de compras imprimible","Llegas al súper con todo claro y no compras de más."],
+              ["📲","Acceso inmediato","En cuanto pagas, descargas todo en tu celular, tablet o compu."],
+            ].map((d,i)=>(
+              <div className="deliver-item" key={i}>
+                <div className="ic">{d[0]}</div>
+                <h3>{d[1]}</h3>
+                <p>{d[2]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARA QUIÉN ES */}
+      <section className="section forwho">
+        <div className="wrap">
+          <h2 className="center">¿Es para ti?</h2>
+          <div className="forwho-grid">
+            <div className="fw-card yes">
+              <h3>✅ Sí, es para ti si…</h3>
+              <ul>
+                <li>Tienes azúcar alta, prediabetes o diabetes tipo 2</li>
+                <li>Comes y te da sueño o te sientes pesado</li>
+                <li>No sabes qué cocinar para cuidarte sin aburrirte</li>
+                <li>Quieres cuidar a tu pareja, mamá o papá</li>
+                <li>Quieres bajar de peso comiendo rico, sin pasar hambre</li>
+              </ul>
+            </div>
+            <div className="fw-card no">
+              <h3>🚫 No es para ti si…</h3>
+              <ul>
+                <li>Buscas una pastilla o un té “milagro” que lo arregle solo</li>
+                <li>No estás dispuesto a cocinar en casa de vez en cuando</li>
+                <li>Esperas dejar de comer todo lo que te gusta</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* BONOS */}
       <section className="section bonos">
         <div className="wrap">
@@ -115,11 +218,18 @@ export default function Home() {
       <section className="section">
         <div className="wrap">
           <h2 className="center">Lo que dicen quienes ya comen con equilibrio</h2>
+          <div className="proof-bar">
+            <span className="stars">★★★★★</span>
+            <span>Miles de familias mexicanas ya cocinan con estas recetas</span>
+          </div>
           <div className="testi-grid">
             {[
               ["★★★★★","“Por fin recetas ricas que no me suben el azúcar. Las de nopales y la tinga en lechuga son mis favoritas.”","María G.","Ciudad de México"],
               ["★★★★★","“Lo mejor es que son platillos normales, mexicanos. Mi esposo ni cuenta se dio de que estamos comiendo más sano.”","Rosa M.","Guadalajara"],
               ["★★★★★","“El menú de 7 días me salvó. Ya no batallo pensando qué hacer de comer todos los días.”","Laura T.","Monterrey"],
+              ["★★★★★","“Ya no me da el bajón de la tarde. Como mi comida completa y sigo con energía para el trabajo.”","Jorge R.","Puebla"],
+              ["★★★★★","“Se lo compré a mi mamá y por fin come variado sin miedo. Las porciones bien explicadas ayudan muchísimo.”","Diana F.","León"],
+              ["★★★★★","“Bajé de peso sin pasar hambre y sin gastar de más. Ingredientes del mercado de siempre.”","Alma V.","Mérida"],
             ].map((t,i)=>(
               <div className="testi" key={i}>
                 <div className="stars">{t[0]}</div>
@@ -128,7 +238,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="center" style={{fontSize:13,color:"var(--grey)",marginTop:18}}>
+          <p className="center testi-disc">
             * Testimonios ilustrativos. Sustitúyelos por reseñas reales de tus clientes.
           </p>
         </div>
