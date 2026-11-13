@@ -1,26 +1,9 @@
+import Image from "next/image";
+import heroImg from "../public/hero.png";
+import portadaImg from "../public/portada.png";
+
 // ⬇️ CAMBIA ESTA URL por tu link de checkout de MundiPay
 const CHECKOUT_URL = "https://pago.mundipay.com/TU-LINK-AQUI";
-
-// "El Plato del Equilibrio": el método del recetario, en una imagen.
-function PlatoEquilibrio() {
-  return (
-    <div className="plato">
-      <svg viewBox="0 0 120 120" role="img" aria-label="El Plato del Equilibrio: mitad verduras, un cuarto proteína, un cuarto carbohidratos inteligentes">
-        <circle cx="60" cy="60" r="56" fill="#ffffff" />
-        <path d="M60,60 L60,8 A52,52 0 0 1 60,112 Z" fill="#5cb878" />
-        <path d="M60,60 L60,112 A52,52 0 0 1 8,60 Z" fill="#f2994a" />
-        <path d="M60,60 L8,60 A52,52 0 0 1 60,8 Z" fill="#f4c56b" />
-        <circle cx="60" cy="60" r="56" fill="none" stroke="#ffffff" strokeWidth="5" />
-        <circle cx="60" cy="60" r="12" fill="#ffffff" />
-      </svg>
-      <div className="plato-legend">
-        <span><i style={{ background: "#5cb878" }} />½ Verduras y fibra</span>
-        <span><i style={{ background: "#f2994a" }} />¼ Proteína</span>
-        <span><i style={{ background: "#f4c56b" }} />¼ Carbohidratos inteligentes</span>
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -36,30 +19,30 @@ export default function Home() {
 
       {/* HERO */}
       <header className="hero">
-        <div className="wrap hero-grid">
+        <Image src={heroImg} alt="Tacos saludables de pollo a la parrilla con pico de gallo y aguacate" fill priority sizes="100vw" className="hero-bg" placeholder="blur" />
+        <div className="hero-badge">👨‍🍳 +100<span>Recetas Saludables</span></div>
+        <div className="wrap hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">Para quien vive con diabetes o azúcar alta</span>
+            <span className="eyebrow">🩸 Para quien vive con diabetes o azúcar alta</span>
             <h1>
               Come rico <span className="amber">sin disparar tu azúcar</span>, con
               recetas mexicanas de verdad
             </h1>
             <p className="sub">
-              100 recetas fáciles y económicas para desayunar, comer y cenar
-              cuidando tu glucosa. Sin dietas imposibles y sin dejar lo que te
-              gusta.
+              +100 recetas fáciles y económicas para desayunar, comer y cenar
+              cuidando tu glucosa. Sin dietas imposibles y sin dejar lo que te gusta.
             </p>
             <div className="cta-wrap">
               <a className="btn btn-lg" href={CHECKOUT_URL}>
-                Quiero mis 100 recetas ahora
+                Quiero mis recetas ahora →
                 <span className="btn-sub">Acceso inmediato · Pago seguro</span>
               </a>
-              <div className="trust">🔒 Descarga al instante · 🇲🇽 Ingredientes mexicanos · 🛡️ Garantía de 7 días</div>
             </div>
-          </div>
-          <div className="hero-visual">
-            <div className="hero-badge">100<small>recetas</small></div>
-            <PlatoEquilibrio />
-            <p className="plato-cap">Aprende a armar tu plato para que la comida<br/>juegue a favor de tu azúcar.</p>
+            <div className="hero-icons">
+              <span><i>🌿</i>Recetas equilibradas</span>
+              <span><i>🍴</i>Ingredientes accesibles</span>
+              <span><i>❤️</i>Controla tu glucosa</span>
+            </div>
           </div>
         </div>
       </header>
@@ -94,19 +77,16 @@ export default function Home() {
         <div className="wrap">
           <h2 className="center">La solución: comer con equilibrio, no con hambre</h2>
           <p className="lead">
-            <b>Glucosa en Equilibrio</b> es un recetario digital con 100 recetas mexicanas
+            <b>Glucosa en Equilibrio</b> es un recetario digital con +100 recetas mexicanas
             pensadas para cuidar tu azúcar: con la fibra, la proteína y la grasa buena justas
             para que tu glucosa suba <b>lento y estable</b>.
           </p>
           <div className="card-prod">
-            <div className="book">
-              <div className="k">GUÍA PRÁCTICA</div>
-              <div className="t">Glucosa en Equilibrio</div>
-              <div className="n">100 recetas mexicanas</div>
-              <div className="badge">eBook + Bonos</div>
+            <div className="cover-wrap">
+              <Image src={portadaImg} alt="Portada del ebook Azúcar Bajo Control, +100 recetas saludables" className="cover" sizes="(max-width:760px) 240px, 320px" placeholder="blur" />
             </div>
             <ul className="feats">
-              <li>100 recetas: desayunos, comidas, cenas, snacks y postres sin azúcar</li>
+              <li>+100 recetas: desayunos, comidas, cenas, snacks y postres sin azúcar</li>
               <li>Tiempo, porciones y nivel de dificultad en cada receta</li>
               <li>“El Plato del Equilibrio”: el método para armar tu comida sin picos</li>
               <li>Menú de 7 días listo para seguir</li>
@@ -127,7 +107,7 @@ export default function Home() {
               ["⚡","Energía toda la tarde","Se acaba el bajón después de comer. Te levantas de la mesa con pilas, no con sueño."],
               ["📉","Tu azúcar, más estable","Platos pensados para que la glucosa suba lento, sin esos picos que te preocupan."],
               ["😋","Comer rico sin culpa","Tacos, guisados, antojitos y hasta postres: versiones ricas que sí puedes comer."],
-              ["🍽️","Nunca más “¿qué cocino?”","Con el menú de 7 días y las 100 recetas, siempre sabes qué hacer de comer."],
+              ["🍽️","Nunca más “¿qué cocino?”","Con el menú de 7 días y las +100 recetas, siempre sabes qué hacer de comer."],
               ["💸","Gastas menos","Ingredientes mexicanos de siempre y económicos. Nada raro ni caro de importación."],
               ["🧘","Más tranquilidad","Comes con confianza y llegas a tu próxima medición sin cruzar los dedos."],
             ].map((b,i)=>(
@@ -149,7 +129,7 @@ export default function Home() {
           <h2 className="center">Esto es exactamente lo que recibes hoy</h2>
           <div className="deliver-grid">
             {[
-              ["📘","Recetario con 100 recetas","Desayunos, comidas, cenas, snacks y postres sin azúcar. En PDF, para siempre."],
+              ["📘","Recetario con +100 recetas","Desayunos, comidas, cenas, snacks y postres sin azúcar. En PDF, para siempre."],
               ["🍽️","Método “El Plato del Equilibrio”","El esquema simple para armar cualquier comida sin disparar tu glucosa."],
               ["🗓️","Menú de 7 días","Un plan día por día para que empieces sin pensar y sin complicarte."],
               ["🍫","Guía de antojos dulces","Qué hacer cuando se te antoja algo dulce, sin culpa y sin picos."],
@@ -253,7 +233,7 @@ export default function Home() {
             <div className="now"><small>$</small>297<small> MXN</small></div>
             <div className="cents">Pago único · Acceso de por vida</div>
             <ul className="inc">
-              <li>Recetario con 100 recetas (PDF)</li>
+              <li>Recetario con +100 recetas (PDF)</li>
               <li>Menú de 7 días</li>
               <li>Guía de antojos dulces</li>
               <li>Lista de compras imprimible</li>
@@ -291,7 +271,7 @@ export default function Home() {
             ))}
           </div>
           <div className="center" style={{marginTop:34}}>
-            <a className="btn btn-lg" href={CHECKOUT_URL}>Quiero mis 100 recetas</a>
+            <a className="btn btn-lg" href={CHECKOUT_URL}>Quiero mis recetas ahora</a>
           </div>
         </div>
       </section>

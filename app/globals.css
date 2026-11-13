@@ -44,29 +44,21 @@ p{font-size:clamp(15px,1.9vw,17px)}
 .nav .btn{padding:11px 22px;font-size:15px}
 
 /* Hero */
-.hero{background:linear-gradient(160deg,var(--teal) 0%,var(--teal-d) 100%);color:#fff;padding:54px 0 64px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06)}
-.hero .wrap{position:relative;z-index:1}
-.hero .eyebrow{display:inline-block;background:rgba(255,255,255,.15);padding:7px 15px;border-radius:50px;font-size:13.5px;font-weight:700;margin-bottom:18px}
-.hero h1{max-width:780px;margin:0 auto}
-.hero .amber{color:#ffd9a3}
-.hero .sub{max-width:620px;margin:16px auto 0;font-size:clamp(16px,2.3vw,20px);opacity:.95}
-.hero .cta-wrap{margin-top:30px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.hero .trust{font-size:13.5px;opacity:.9;margin-top:6px}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-.hero-copy{text-align:left}
-.hero h1{max-width:none;margin:0}
-.hero .sub{max-width:560px;margin:16px 0 0}
-/* Plato del Equilibrio */
-.hero-visual{position:relative;display:flex;flex-direction:column;align-items:center}
-.plato{width:100%;max-width:300px}
-.plato svg{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.28))}
-.plato-legend{margin-top:18px;display:flex;flex-direction:column;gap:9px}
-.plato-legend span{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600}
-.plato-legend i{width:15px;height:15px;border-radius:4px;flex:none;display:inline-block}
-.plato-cap{font-size:13.5px;opacity:.9;text-align:center;margin-top:14px;line-height:1.5}
-.hero-badge{position:absolute;top:-10px;right:4px;z-index:2;background:var(--amber);color:#fff;width:76px;height:76px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;font-weight:800;line-height:1;box-shadow:0 10px 24px rgba(0,0,0,.25);transform:rotate(8deg)}
-.hero-badge small{font-size:11px;font-weight:700;letter-spacing:.04em;margin-top:2px}
+.hero{position:relative;color:#fff;overflow:hidden;background:#123a26}
+.hero-bg{object-fit:cover;object-position:74% center;z-index:0}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(11,46,29,.96) 0%,rgba(11,46,29,.82) 42%,rgba(11,46,29,.25) 72%,rgba(11,46,29,.02) 100%)}
+.hero-inner{position:relative;z-index:2;min-height:clamp(440px,56vw,560px);display:flex;align-items:center;padding-top:44px;padding-bottom:44px}
+.hero-copy{max-width:600px;text-align:left}
+.hero .eyebrow{display:inline-block;background:rgba(255,255,255,.16);padding:7px 15px;border-radius:50px;font-size:13.5px;font-weight:700;margin-bottom:16px}
+.hero h1{max-width:none;margin:0;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.hero .amber{color:#ffd24d}
+.hero .sub{max-width:520px;margin:16px 0 0;font-size:clamp(16px,2.3vw,19px);opacity:.97;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.hero .cta-wrap{margin-top:26px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.hero-icons{display:flex;flex-wrap:wrap;gap:16px 26px;margin-top:26px}
+.hero-icons span{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700}
+.hero-icons i{font-style:normal;font-size:17px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center}
+.hero-badge{position:absolute;top:24px;right:26px;z-index:3;background:#ffd24d;color:#8a3b0a;border-radius:16px;padding:11px 18px;text-align:center;font-weight:900;font-size:27px;line-height:.9;box-shadow:0 10px 26px rgba(0,0,0,.32);transform:rotate(4deg)}
+.hero-badge span{display:block;font-size:12.5px;font-weight:800;margin-top:4px;letter-spacing:.01em}
 
 /* Dolores */
 .pains{background:var(--cream)}
@@ -79,11 +71,8 @@ p{font-size:clamp(15px,1.9vw,17px)}
 /* Solución */
 .sol .lead{max-width:720px;margin:16px auto 0;color:var(--grey);text-align:center}
 .card-prod{background:linear-gradient(160deg,#fff,var(--teal-l));border:1px solid var(--line);border-radius:22px;padding:34px;margin-top:34px;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1.4fr;gap:30px;align-items:center}
-.book{aspect-ratio:3/4;border-radius:12px;background:linear-gradient(155deg,var(--teal),var(--teal-d));box-shadow:var(--shadow-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:24px}
-.book .k{font-size:12px;letter-spacing:.14em;font-weight:700;opacity:.85}
-.book .t{font-size:27px;font-weight:800;margin:10px 0;line-height:1.1}
-.book .n{font-size:13px;opacity:.9}
-.book .badge{margin-top:16px;background:var(--amber);padding:6px 14px;border-radius:50px;font-size:13px;font-weight:800}
+.cover-wrap{display:flex;justify-content:center}
+.cover{width:100%;height:auto;max-width:320px;border-radius:10px;box-shadow:var(--shadow-lg)}
 .feats{list-style:none}
 .feats li{padding:9px 0 9px 32px;position:relative;font-size:16px;border-bottom:1px dashed var(--line)}
 .feats li::before{content:"✓";position:absolute;left:0;top:8px;color:#fff;background:var(--green);width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
@@ -189,17 +178,15 @@ p{font-size:clamp(15px,1.9vw,17px)}
 .proof-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:18px auto 0;background:var(--cream);border:1px solid var(--line);border-radius:50px;padding:10px 20px;max-width:fit-content;font-size:14.5px;font-weight:600;color:var(--grey)}
 .proof-bar .stars{color:#f5a623;font-size:17px;letter-spacing:2px}
 
-@media(max-width:860px){
-  .hero-grid{grid-template-columns:1fr;gap:30px;text-align:center}
-  .hero-copy{text-align:center}
-  .hero h1,.hero .sub{margin-inline:auto}
-  .hero .cta-wrap{align-items:center}
-  .hero-visual{order:-1;margin-bottom:4px}
-  .plato-legend{align-items:flex-start;max-width:280px;margin-inline:auto}
-}
 @media(max-width:760px){
+  .hero::before{background:linear-gradient(180deg,rgba(11,46,29,.92) 0%,rgba(11,46,29,.78) 38%,rgba(11,46,29,.55) 100%)}
+  .hero-bg{object-position:68% center}
+  .hero-inner{min-height:clamp(430px,108vw,560px)}
+  .hero-badge{top:14px;right:14px;font-size:20px;padding:9px 13px;border-radius:13px}
+  .hero-badge span{font-size:11px}
+  .hero-icons{gap:12px 18px}
   .card-prod{grid-template-columns:1fr;gap:22px}
-  .book{max-width:220px;margin:0 auto}
+  .cover{max-width:240px}
   .section{padding:44px 0}
   .nav .brand{font-size:17px}
   .forwho-grid{grid-template-columns:1fr}
