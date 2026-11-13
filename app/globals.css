@@ -97,6 +97,7 @@ p{font-size:clamp(15px,1.9vw,17px)}
 /* Oferta */
 .offer{background:var(--cream)}
 .price-card{max-width:520px;margin:30px auto 0;background:#fff;border:2px solid var(--teal);border-radius:22px;padding:34px 28px;text-align:center;box-shadow:var(--shadow-lg)}
+.offer-cover{width:140px;height:auto;border-radius:8px;box-shadow:var(--shadow-lg);margin:-10px auto 16px;display:block}
 .price-card .old{color:var(--grey);text-decoration:line-through;font-size:20px}
 .price-card .now{font-size:52px;font-weight:800;color:var(--teal);line-height:1}
 .price-card .now small{font-size:22px;vertical-align:top}

@@ -232,6 +232,7 @@ export default function Home() {
         <div className="wrap">
           <h2 className="center">No pases otra semana comiendo a ciegas</h2>
           <div className="price-card">
+            <Image src={portadaImg} alt="Portada del ebook Azúcar Bajo Control" className="offer-cover" sizes="150px" placeholder="blur" />
             <div className="old">Antes $594 MXN</div>
             <div className="now"><small>$</small>297<small> MXN</small></div>
             <div className="cents">Pago único · Acceso de por vida · Sin mensualidades</div>
