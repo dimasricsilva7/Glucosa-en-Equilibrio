@@ -1,12 +1,12 @@
-import Image from "next/image";
-import heroImg from "../public/hero.png";
-import portadaImg from "../public/portada.png";
-import autoraImg from "../public/autora.png";
+import BuyButton from "./BuyButton";
+import { getSettings } from "../lib/db";
+import { withDefaults } from "../lib/defaults";
 
-// ⬇️ CAMBIA ESTA URL por tu link de checkout de MundiPay
-const CHECKOUT_URL = "https://pago.mundipay.com/TU-LINK-AQUI";
+export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default async function Home() {
+  const s = withDefaults(await getSettings());
+
   return (
     <main>
       <div className="top">⚡ Oferta por tiempo limitado · 50% de descuento solo hoy</div>
@@ -14,31 +14,26 @@ export default function Home() {
       <nav className="nav">
         <div className="wrap">
           <div className="brand">Azúcar<span> Bajo Control</span></div>
-          <a className="btn" href={CHECKOUT_URL}>Quiero el recetario</a>
+          <BuyButton url={s.checkoutUrl} className="btn">Quiero el recetario</BuyButton>
         </div>
       </nav>
 
       {/* HERO */}
       <header className="hero">
-        <Image src={heroImg} alt="Tacos saludables de pollo a la parrilla con pico de gallo y aguacate" fill priority sizes="100vw" className="hero-bg" placeholder="blur" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={s.heroImg} alt="Tacos saludables de pollo a la parrilla con pico de gallo y aguacate" className="hero-bg" />
         <div className="hero-badge">👨‍🍳 +100<span>Recetas Saludables</span></div>
         <div className="wrap hero-inner">
           <div className="hero-copy">
             <span className="eyebrow">🩸 Si tienes azúcar alta o diabetes, lee esto</span>
-            <h1>
-              Comes “bien” y tu azúcar <span className="amber">sigue por las nubes</span>.
-              El problema no eres tú.
-            </h1>
+            <h1>{s.heroTitle}</h1>
             <p className="sub">
               Cada comida es una apuesta: te mides cruzando los dedos y el bajón de la
               tarde te recuerda que algo sigue mal. Deja de comer con miedo con +100
               recetas mexicanas que sí puedes comer, sin dietas imposibles.
             </p>
             <div className="cta-wrap">
-              <a className="btn btn-lg" href={CHECKOUT_URL}>
-                Quiero empezar hoy →
-                <span className="btn-sub">Acceso inmediato · Pago seguro</span>
-              </a>
+              <BuyButton url={s.checkoutUrl} sub="Acceso inmediato · Pago seguro">Quiero empezar hoy →</BuyButton>
             </div>
             <div className="hero-icons">
               <span><i>🌿</i>Recetas equilibradas</span>
@@ -87,7 +82,8 @@ export default function Home() {
           </p>
           <div className="card-prod">
             <div className="cover-wrap">
-              <Image src={portadaImg} alt="Portada del ebook Azúcar Bajo Control, +100 recetas saludables" className="cover" sizes="(max-width:760px) 240px, 320px" placeholder="blur" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={s.coverImg} alt="Portada del ebook Azúcar Bajo Control, +100 recetas saludables" className="cover" />
             </div>
             <ul className="feats">
               <li>+100 recetas: desayunos, comidas, cenas, snacks y postres sin azúcar</li>
@@ -127,7 +123,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* QUÉ ENTREGA / QUÉ RECIBES */}
+      {/* QUÉ ENTREGA */}
       <section className="section deliver">
         <div className="wrap">
           <h2 className="center">Esto es exactamente lo que recibes hoy</h2>
@@ -202,23 +198,14 @@ export default function Home() {
       <section className="section author">
         <div className="wrap author-wrap">
           <div className="author-photo">
-            <Image src={autoraImg} alt="Autora de Azúcar Bajo Control" className="author-img" sizes="(max-width:760px) 220px, 360px" placeholder="blur" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={s.authorImg} alt={s.authorName} className="author-img" />
           </div>
           <div className="author-copy">
             <span className="eyebrow-dark">Quién está detrás</span>
             <h2>Comida mexicana de verdad, pensada para tu glucosa</h2>
-            <p>
-              Azúcar Bajo Control nace de una idea simple: cuidar tu azúcar no tiene por qué
-              significar comer aburrido ni renunciar a los platillos que amas.
-            </p>
-            <p>
-              Cada una de las +100 recetas fue seleccionada y probada bajo un mismo principio
-              —el del <b>plato equilibrado</b> y el <b>orden de los alimentos</b>— para que
-              disfrutes tu comida de siempre con la fibra, la proteína y la grasa buena en su
-              punto. Sin dietas imposibles, sin ingredientes raros. Comida real, pensada para
-              tu día a día.
-            </p>
-            <p className="author-name">— Equipo Azúcar Bajo Control</p>
+            <p style={{ whiteSpace: "pre-line" }}>{s.authorDesc}</p>
+            <p className="author-name">— {s.authorName}</p>
           </div>
         </div>
       </section>
@@ -258,11 +245,12 @@ export default function Home() {
         <div className="wrap">
           <h2 className="center">No pases otra semana comiendo a ciegas</h2>
           <div className="price-card">
-            <Image src={portadaImg} alt="Portada del ebook Azúcar Bajo Control" className="offer-cover" sizes="150px" placeholder="blur" />
-            <div className="old">Antes $594 MXN</div>
-            <div className="now"><small>$</small>297<small> MXN</small></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={s.coverImg} alt="Portada del ebook Azúcar Bajo Control" className="offer-cover" />
+            <div className="old">Antes ${s.priceOld} MXN</div>
+            <div className="now"><small>$</small>{s.priceNow}<small> MXN</small></div>
             <div className="cents">Pago único · Acceso de por vida · Sin mensualidades</div>
-            <div className="urg">⏳ Precio de hoy con 50% OFF. Cuando termine la oferta, vuelve a $594.</div>
+            <div className="urg">⏳ Precio de hoy con 50% OFF. Cuando termine la oferta, vuelve a ${s.priceOld}.</div>
             <ul className="inc">
               <li>Recetario con +100 recetas (PDF)</li>
               <li>Menú de 7 días</li>
@@ -270,10 +258,7 @@ export default function Home() {
               <li>Lista de compras imprimible</li>
               <li>Acceso inmediato tras el pago</li>
             </ul>
-            <a className="btn btn-lg" href={CHECKOUT_URL}>
-              Quiero empezar ahora
-              <span className="btn-sub">Pago 100% seguro con MundiPay</span>
-            </a>
+            <BuyButton url={s.checkoutUrl} sub="Pago 100% seguro con MundiPay">Quiero empezar ahora</BuyButton>
           </div>
           <div className="guarantee">
             <div className="seal">🛡️</div>
@@ -302,7 +287,7 @@ export default function Home() {
             ))}
           </div>
           <div className="center" style={{marginTop:34}}>
-            <a className="btn btn-lg" href={CHECKOUT_URL}>Quiero mis recetas ahora</a>
+            <BuyButton url={s.checkoutUrl}>Quiero mis recetas ahora</BuyButton>
           </div>
         </div>
       </section>
