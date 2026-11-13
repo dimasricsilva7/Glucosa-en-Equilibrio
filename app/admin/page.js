@@ -40,13 +40,13 @@ async function save(formData) {
   redirect(err ? "/admin?err=" + encodeURIComponent(err) : "/admin?ok=1");
 }
 
-// Campos agrupados por seção
+// Campos agrupados em blocos do dashboard
 const FIELDS = [
-  { title: "Hero", keys: ["heroTitle"] },
+  { title: "Hero", keys: ["heroTitle"], span: true },
   { title: "Preços (MXN)", keys: ["priceOld", "priceNow"], row: true },
-  { title: "Imagens (cole um link, ou deixe /hero.png etc.)", keys: ["heroImg", "coverImg", "authorImg"] },
-  { title: "Autor", keys: ["authorName", "authorDesc"] },
   { title: "Checkout", keys: ["checkoutUrl"] },
+  { title: "Imagens (link ou /arquivo.png)", keys: ["heroImg", "coverImg", "authorImg"], span: true, row3: true },
+  { title: "Autor", keys: ["authorName", "authorDesc"], span: true },
 ];
 const LABELS = {
   heroTitle: "Título da hero",
@@ -101,26 +101,28 @@ export default async function Admin({ searchParams }) {
         <p className="admin-status warn">⚠️ Banco não conectado neste deploy. Conecte o Neon na Vercel e clique em <b>Redeploy</b> — sem isso as edições e os pedidos não são salvos.</p>
       )}
 
-      <form action={save} className="admin-card">
-        {FIELDS.map((group) => (
-          <div className="admin-section" key={group.title}>
-            <h2>{group.title}</h2>
-            <div className={group.row ? "admin-row2" : ""}>
-              {group.keys.map((k) => (
-                <label className="admin-field" key={k}>
-                  <span>{LABELS[k]}</span>
-                  {BIG.has(k)
-                    ? <textarea name={k} defaultValue={s[k]} rows={k === "authorDesc" ? 6 : 2} />
-                    : <input name={k} defaultValue={s[k]} />}
-                </label>
-              ))}
+      <form action={save}>
+        <div className="admin-grid">
+          {FIELDS.map((group) => (
+            <div className={"admin-block" + (group.span ? " span2" : "")} key={group.title}>
+              <h2>{group.title}</h2>
+              <div className={group.row3 ? "admin-row3" : group.row ? "admin-row2" : ""}>
+                {group.keys.map((k) => (
+                  <label className="admin-field" key={k}>
+                    <span>{LABELS[k]}</span>
+                    {BIG.has(k)
+                      ? <textarea name={k} defaultValue={s[k]} rows={k === "authorDesc" ? 6 : 2} />
+                      : <input name={k} defaultValue={s[k]} />}
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <button className="btn btn-lg admin-save" type="submit">Salvar alterações</button>
       </form>
 
-      <div className="admin-card">
+      <div className="admin-card admin-leads">
         <h2>Clientes / pedidos <span className="admin-count">{leads.length}</span></h2>
         {leads.length === 0 ? (
           <p className="admin-muted">Ainda nenhum pedido registrado.</p>
