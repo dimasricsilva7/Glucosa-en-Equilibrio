@@ -23,25 +23,26 @@ export default function Home() {
         <div className="hero-badge">👨‍🍳 +100<span>Recetas Saludables</span></div>
         <div className="wrap hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">🩸 Para quien vive con diabetes o azúcar alta</span>
+            <span className="eyebrow">🩸 Si tienes azúcar alta o diabetes, lee esto</span>
             <h1>
-              Come rico <span className="amber">sin disparar tu azúcar</span>, con
-              recetas mexicanas de verdad
+              Comes “bien” y tu azúcar <span className="amber">sigue por las nubes</span>.
+              El problema no eres tú.
             </h1>
             <p className="sub">
-              +100 recetas fáciles y económicas para desayunar, comer y cenar
-              cuidando tu glucosa. Sin dietas imposibles y sin dejar lo que te gusta.
+              Cada comida es una apuesta: te mides cruzando los dedos y el bajón de la
+              tarde te recuerda que algo sigue mal. Deja de comer con miedo con +100
+              recetas mexicanas que sí puedes comer, sin dietas imposibles.
             </p>
             <div className="cta-wrap">
               <a className="btn btn-lg" href={CHECKOUT_URL}>
-                Quiero mis recetas ahora →
+                Quiero empezar hoy →
                 <span className="btn-sub">Acceso inmediato · Pago seguro</span>
               </a>
             </div>
             <div className="hero-icons">
               <span><i>🌿</i>Recetas equilibradas</span>
               <span><i>🍴</i>Ingredientes accesibles</span>
-              <span><i>❤️</i>Controla tu glucosa</span>
+              <span><i>❤️</i>Pensadas para tu glucosa</span>
             </div>
           </div>
         </div>
@@ -50,13 +51,13 @@ export default function Home() {
       {/* DOLORES */}
       <section className="section pains">
         <div className="wrap">
-          <h2 className="center">¿Te suena familiar?</h2>
+          <h2 className="center">¿Cuánto tiempo llevas comiendo con miedo?</h2>
           <div className="pain-grid">
             {[
-              ["😮‍💨","Comes y te da sueño","Ese bajón después de comer que te deja sin energía toda la tarde."],
-              ["🍞","No sabes qué cocinar","Sientes que “todo lo rico” te sube el azúcar y no te queda nada por comer."],
-              ["😟","Miedo a los resultados","Cada vez que te checas el azúcar, cruzas los dedos esperando que salga bien."],
-              ["🔁","Dietas que no duras","Empiezas con todo el lunes y para el jueves ya la dejaste. Siempre pasa."],
+              ["😨","Comes con miedo","Cada bocado es una duda: “¿esto me va a subir?”. Comer dejó de ser un gusto y se volvió una preocupación."],
+              ["🩸","Te mides cruzando los dedos","Ver el número en el aparato te aprieta el estómago. Y cuando sale alto, el día entero se te viene abajo."],
+              ["😮‍💨","El bajón que te apaga","Comes y en una hora estás arrastrándote de sueño, sin energía y sin entender por qué."],
+              ["🔁","Cansado de intentar y fallar","Empiezas la dieta el lunes y para el jueves ya la dejaste. Otra vez. Y la culpa pesa más que el hambre."],
             ].map((p,i)=>(
               <div className="pain" key={i}>
                 <div className="ic">{p[0]}</div>
@@ -66,8 +67,9 @@ export default function Home() {
             ))}
           </div>
           <p className="center pains-note">
-            No es falta de voluntad. Es que nadie te enseñó <b>cómo combinar tu plato</b> para
-            que la comida juegue a tu favor. Eso cambia hoy.
+            No es falta de voluntad ni de disciplina. Es que <b>nadie te explicó cómo armar tu
+            plato</b> con tu comida de siempre para que la glucosa no se te dispare. Y cada
+            semana que sigues comiendo a ciegas es otra semana que no vuelve. Eso se acaba hoy.
           </p>
         </div>
       </section>
@@ -75,11 +77,12 @@ export default function Home() {
       {/* SOLUCIÓN */}
       <section className="section sol">
         <div className="wrap">
-          <h2 className="center">La solución: comer con equilibrio, no con hambre</h2>
+          <h2 className="center">Imagina sentarte a comer sin miedo</h2>
           <p className="lead">
-            <b>Glucosa en Equilibrio</b> es un recetario digital con +100 recetas mexicanas
-            pensadas para cuidar tu azúcar: con la fibra, la proteína y la grasa buena justas
-            para que tu glucosa suba <b>lento y estable</b>.
+            Servirte tu plato, disfrutarlo y levantarte con energía — tranquilo, porque sabes
+            que está bien armado. Eso es <b>Glucosa en Equilibrio</b>: +100 recetas mexicanas de
+            verdad, con la fibra, la proteína y la grasa buena en su punto para que tu glucosa
+            suba <b>lento y parejo</b>, no de golpe.
           </p>
           <div className="card-prod">
             <div className="cover-wrap">
@@ -100,12 +103,12 @@ export default function Home() {
       {/* BENEFICIOS / TRANSFORMACIÓN */}
       <section className="section benefits">
         <div className="wrap">
-          <h2 className="center">Cómo te vas a sentir en las próximas semanas</h2>
-          <p className="lead">No es una dieta. Es una forma de comer que puedes sostener toda la vida, con la comida que ya conoces y te gusta.</p>
+          <h2 className="center">Lo que cambia cuando comes bien armado</h2>
+          <p className="lead">No es una dieta de hambre ni de pura lechuga. Es comer lo que te gusta, bien armado — algo que puedes sostener toda la vida.</p>
           <div className="benefit-grid">
             {[
-              ["⚡","Energía toda la tarde","Se acaba el bajón después de comer. Te levantas de la mesa con pilas, no con sueño."],
-              ["📉","Tu azúcar, más estable","Platos pensados para que la glucosa suba lento, sin esos picos que te preocupan."],
+              ["⚡","Adiós al bajón de la tarde","Te levantas de la mesa con pilas, no arrastrándote de sueño a la hora de trabajar."],
+              ["📉","Comidas que no te disparan","Platos armados para que la glucosa suba lento y parejo, sin esos picos que te quitan la paz."],
               ["😋","Comer rico sin culpa","Tacos, guisados, antojitos y hasta postres: versiones ricas que sí puedes comer."],
               ["🍽️","Nunca más “¿qué cocino?”","Con el menú de 7 días y las +100 recetas, siempre sabes qué hacer de comer."],
               ["💸","Gastas menos","Ingredientes mexicanos de siempre y económicos. Nada raro ni caro de importación."],
@@ -227,11 +230,12 @@ export default function Home() {
       {/* OFERTA */}
       <section className="section offer" id="oferta">
         <div className="wrap">
-          <h2 className="center">Empieza hoy a comer rico y tranquilo</h2>
+          <h2 className="center">No pases otra semana comiendo a ciegas</h2>
           <div className="price-card">
             <div className="old">Antes $594 MXN</div>
             <div className="now"><small>$</small>297<small> MXN</small></div>
-            <div className="cents">Pago único · Acceso de por vida</div>
+            <div className="cents">Pago único · Acceso de por vida · Sin mensualidades</div>
+            <div className="urg">⏳ Precio de hoy con 50% OFF. Cuando termine la oferta, vuelve a $594.</div>
             <ul className="inc">
               <li>Recetario con +100 recetas (PDF)</li>
               <li>Menú de 7 días</li>

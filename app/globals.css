@@ -101,6 +101,7 @@ p{font-size:clamp(15px,1.9vw,17px)}
 .price-card .now{font-size:52px;font-weight:800;color:var(--teal);line-height:1}
 .price-card .now small{font-size:22px;vertical-align:top}
 .price-card .cents{font-size:15px;color:var(--grey);margin-top:6px}
+.price-card .urg{margin-top:14px;background:var(--amber-l);color:var(--amber-d);border:1px solid var(--amber);border-radius:12px;padding:10px 14px;font-size:13.5px;font-weight:700;line-height:1.4}
 .price-card .inc{list-style:none;text-align:left;margin:22px 0;display:inline-block}
 .price-card .inc li{padding:6px 0 6px 28px;position:relative;font-size:15px}
 .price-card .inc li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
