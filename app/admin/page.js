@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getSettings, saveSettings, getLeads } from "../../lib/db";
+import { getSettings, saveSettings, getLeads, deleteLead } from "../../lib/db";
 import { withDefaults } from "../../lib/defaults";
 
 export const dynamic = "force-dynamic";
@@ -38,6 +38,14 @@ async function save(formData) {
     err = e.message || "error";
   }
   redirect(err ? "/admin?err=" + encodeURIComponent(err) : "/admin?ok=1");
+}
+
+async function removeLead(formData) {
+  "use server";
+  if (!authed()) redirect("/admin");
+  const id = Number(formData.get("id"));
+  if (id) await deleteLead(id);
+  redirect("/admin");
 }
 
 // Campos agrupados em blocos do dashboard
@@ -123,19 +131,30 @@ export default async function Admin({ searchParams }) {
       </form>
 
       <div className="admin-card admin-leads">
-        <h2>Clientes / pedidos <span className="admin-count">{leads.length}</span></h2>
+        <div className="admin-leads-head">
+          <h2>Clientes / pedidos <span className="admin-count">{leads.length}</span></h2>
+          {leads.length > 0 && (
+            <a className="admin-csv" href="/api/leads/export">⬇ Baixar lista (CSV)</a>
+          )}
+        </div>
         {leads.length === 0 ? (
           <p className="admin-muted">Ainda nenhum pedido registrado.</p>
         ) : (
           <div className="admin-table-wrap">
             <table className="admin-table">
-              <thead><tr><th>Nome</th><th>E-mail</th><th>Data</th></tr></thead>
+              <thead><tr><th>Nome</th><th>E-mail</th><th>Data</th><th></th></tr></thead>
               <tbody>
-                {leads.map((l, i) => (
-                  <tr key={i}>
+                {leads.map((l) => (
+                  <tr key={l.id}>
                     <td>{l.name || "—"}</td>
                     <td>{l.email}</td>
                     <td className="admin-date">{new Date(l.created_at).toLocaleString("pt-BR")}</td>
+                    <td>
+                      <form action={removeLead}>
+                        <input type="hidden" name="id" value={l.id} />
+                        <button className="admin-del" type="submit" title="Excluir cliente">Excluir</button>
+                      </form>
+                    </td>
                   </tr>
                 ))}
               </tbody>
