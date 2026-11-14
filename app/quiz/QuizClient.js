@@ -30,8 +30,11 @@ const STEPS = [
 
 export default function QuizClient() {
   const [i, setI] = useState(0);
-  const [phase, setPhase] = useState("quiz"); // quiz | loading | done
+  const [phase, setPhase] = useState("quiz"); // quiz | loading | capture | done
   const [step, setStep] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
 
   const pick = () => {
     if (i < QUESTIONS.length - 1) setI(i + 1);
@@ -44,9 +47,22 @@ export default function QuizClient() {
       const t = setTimeout(() => setStep((x) => x + 1), 750);
       return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setPhase("done"), 650);
+    const t = setTimeout(() => setPhase("capture"), 650);
     return () => clearTimeout(t);
   }, [phase, step]);
+
+  async function submitCapture(e) {
+    e.preventDefault();
+    setBusy(true);
+    try {
+      await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      });
+    } catch {}
+    setPhase("done");
+  }
 
   const pct = phase === "quiz" ? Math.round((i / QUESTIONS.length) * 100) : 100;
 
@@ -73,6 +89,20 @@ export default function QuizClient() {
                   </li>
                 ))}
               </ul>
+            </div>
+          ) : phase === "capture" ? (
+            <div className="capture">
+              <div className="qemoji">🎉</div>
+              <h2>¡Tu recetario está listo!</h2>
+              <p>Dinos a dónde te lo enviamos y verás tu plan personalizado al instante.</p>
+              <form onSubmit={submitCapture} className="capture-form">
+                <input required placeholder="Tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
+                <input required type="email" placeholder="Tu correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <button className="btn btn-lg" disabled={busy}>
+                  {busy ? "Preparando…" : "Ver mi recetario →"}
+                </button>
+              </form>
+              <p className="capture-note">🔒 Sin spam. Solo tu recetario y tips para cuidar tu azúcar.</p>
             </div>
           ) : phase === "done" ? (
             <div className="result">

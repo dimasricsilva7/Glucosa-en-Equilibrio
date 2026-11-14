@@ -178,6 +178,15 @@ p{font-size:clamp(15px,1.9vw,17px)}
 .load-steps li.on{opacity:1;color:var(--ink);animation:qin .3s ease both}
 .load-steps .chk{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
 .load-steps li.on .chk{background:var(--green);border-color:var(--green)}
+/* Captura de lead no quiz */
+.capture{text-align:center;animation:qin .4s ease both}
+.capture h2{color:var(--teal-d);font-size:clamp(21px,3.4vw,26px)}
+.capture > p{color:var(--grey);margin:10px 0 20px}
+.capture-form{display:flex;flex-direction:column;gap:11px}
+.capture-form input{width:100%;padding:15px 16px;border:2px solid var(--line);border-radius:12px;font-size:16px;font-family:inherit}
+.capture-form input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-l)}
+.capture-form .btn-lg{margin-top:4px}
+.capture-note{font-size:13px;color:var(--grey);margin-top:14px}
 
 .pains-note{margin-top:28px;max-width:680px;margin-inline:auto;color:var(--grey)}
 .testi-disc{font-size:13px;color:var(--grey);margin-top:18px}

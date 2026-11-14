@@ -1,4 +1,3 @@
-import BuyButton from "./BuyButton";
 import { getSettings } from "../lib/db";
 import { withDefaults } from "../lib/defaults";
 
@@ -14,7 +13,7 @@ export default async function Home() {
       <nav className="nav">
         <div className="wrap">
           <div className="brand">Azúcar<span> Bajo Control</span></div>
-          <BuyButton url={s.checkoutUrl} className="btn">Quiero el recetario</BuyButton>
+          <a className="btn" href={s.checkoutUrl}>Quiero el recetario</a>
         </div>
       </nav>
 
@@ -33,7 +32,7 @@ export default async function Home() {
               recetas mexicanas que sí puedes comer, sin dietas imposibles.
             </p>
             <div className="cta-wrap">
-              <BuyButton url={s.checkoutUrl} sub="Acceso inmediato · Pago seguro">Quiero empezar hoy →</BuyButton>
+              <a className="btn btn-lg" href={s.checkoutUrl}>Quiero empezar hoy →<span className="btn-sub">Acceso inmediato · Pago seguro</span></a>
             </div>
             <div className="hero-icons">
               <span><i>🌿</i>Recetas equilibradas</span>
@@ -258,7 +257,7 @@ export default async function Home() {
               <li>Lista de compras imprimible</li>
               <li>Acceso inmediato tras el pago</li>
             </ul>
-            <BuyButton url={s.checkoutUrl} sub="Pago 100% seguro con MundiPay">Quiero empezar ahora</BuyButton>
+            <a className="btn btn-lg" href={s.checkoutUrl}>Quiero empezar ahora<span className="btn-sub">Pago 100% seguro con MundiPay</span></a>
           </div>
           <div className="guarantee">
             <div className="seal">🛡️</div>
@@ -287,7 +286,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="center" style={{marginTop:34}}>
-            <BuyButton url={s.checkoutUrl}>Quiero mis recetas ahora</BuyButton>
+            <a className="btn btn-lg" href={s.checkoutUrl}>Quiero mis recetas ahora</a>
           </div>
         </div>
       </section>
